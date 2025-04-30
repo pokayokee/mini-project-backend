@@ -1,0 +1,68 @@
+###### USER #######
+
+### Read all users
+GET http://localhost:3030/mongo/users
+
+### Create a new user
+POST http://localhost:3030/mongo/users
+Content-Type: application/json
+
+{
+  "name": "pakkad",
+  "email": "pakkad@example.com"
+}
+
+###  Register a new user
+POST http://localhost:3030/mongo/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Karina Yoo",
+  "email": "yoojimin@example.com",
+  "password": "Karina12345"
+}
+
+###  Login with the register user
+POST http://localhost:3030/mongo/auth/login
+Content-Type: application/json
+
+{
+  "email": "kimminjeong@example.com",
+  "password": "winter12345"
+}
+
+###### NOTE #######
+
+### Read all notes
+GET http://localhost:3030/mongo/notes
+
+### Create a new note
+POST http://localhost:3030/mongo/notes
+Content-Type: application/json
+
+{
+  "title": "today zzz",
+  "content": "sleepy",
+  "tags": ["nodejs", "express"],
+  "isPinned": false,
+  "userId": "6809fd5852097b5b17d3abd1"
+}
+
+###  Add a new note (protected route)
+POST http://localhost:3030/mongo/add-note
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODBiM2E2MWQyNjk2MjQ1MzBkZmFhYzIiLCJpYXQiOjE3NDU1NjczOTYsImV4cCI6MTc0NTU3MDk5Nn0.8mgUhYXCI8Dbar2O1blOUhNhEIvBwQLROOxPTDA3Mh8
+
+{
+  "title": "Test",
+  "content": "refactor code",
+  "tags": ["important", "yesterday"]
+}
+
+### Get all notes for the login user
+GET http://localhost:3030/mongo/get-all-notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODBiM2E2MWQyNjk2MjQ1MzBkZmFhYzIiLCJpYXQiOjE3NDU1NjczOTYsImV4cCI6MTc0NTU3MDk5Nn0.8mgUhYXCI8Dbar2O1blOUhNhEIvBwQLROOxPTDA3Mh8
+
+### Search notes
+GET http://localhost:3030/mongo/search-notes?query=Funny
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODBiM2E2MWQyNjk2MjQ1MzBkZmFhYzIiLCJpYXQiOjE3NDU1NjczOTYsImV4cCI6MTc0NTU3MDk5Nn0.8mgUhYXCI8Dbar2O1blOUhNhEIvBwQLROOxPTDA3Mh8
