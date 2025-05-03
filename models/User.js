@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 // Create MongoDB document schema
 const UserSchema = new Schema({
-  name: { type: String },
+  fullName: { type: String, require: true },
   email: { type: String },
   password: { type: String, required: true },
   createdOn: { type:Date, default: new Date().getTime() },

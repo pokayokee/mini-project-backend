@@ -1,8 +1,18 @@
-import express from 'express';
-import { addNote, createNote, getAllNotes, getNoteByUser, searchNotes } from './controllers/notesController.js';
-import { authUser } from '../../../middleware/auth.js'; 
+import express from "express";
+import {
+  addNote,
+  createNote,
+  deleteNote,
+  editNote,
+  getAllNotes,
+  getNotesUser,
+  searchNotes,
+  togglePin,
+} from "./controllers/notesController.js";
+import { authUser } from "../../../middleware/auth.js";
+import { Note } from "../../../models/Note.js";
 
-const router = express.Router()
+const router = express.Router();
 
 // Read all notes
 router.get("/notes", getAllNotes);
@@ -14,22 +24,16 @@ router.post("/notes", createNote);
 router.post("/add-note", authUser, addNote);
 
 // Edit note
-router.put("/edit-note/:noteId", async (req, res) => {
-
-})
+router.put("/edit-note/:noteId", authUser, editNote);
 
 // Update isPinned
-router.put("/update-note-pinned/:noteId", async (req, res) => {
+router.put("/update-note-pinned/:noteId", authUser, togglePin);
 
-})
-
-// Get notes by user
-router.get("/get-all-notes", authUser, getNoteByUser);
+// Get all notes by user
+router.get("/get-all-notes", authUser, getNotesUser);
 
 // Delete note
-router.delete("/delete-note/:noteId", async (req, res) => {
-  
-})
+router.delete("/delete-note/:noteId", authUser, deleteNote);
 
 // Search notes
 router.get("/search-notes", authUser, searchNotes);
